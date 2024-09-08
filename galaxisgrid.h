@@ -2,17 +2,25 @@
 #define GALAXISGRID_H
 
 #include <QObject>
+#include <QQmlEngine>
 
 class GalaxisGrid : public QObject
 {
     Q_OBJECT
-    public:
-        explicit GalaxisGrid(QObject *parent = nullptr);
+public:
+    static void registerQml();
+    static GalaxisGrid *instance();
+    static QObject *qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine);
 
-    signals:
+public slots:
 
-    private:
+signals:
 
+private slots:
+
+private:
+    explicit GalaxisGrid(QObject *parent = nullptr);
+    static GalaxisGrid *m_pThis;
 };
 
-#endif // GALAXISGRID_H
+#endif // Erreur dans «  Cpp.classToHeaderGuard(value('Class'), Util.suffix(value('HdrFileName'))) » : TypeError: Property 'classToHeaderGuard' of object CppEditor::Internal::CppToolsJsExtension(0x1fd3dc543b0) is not a function
