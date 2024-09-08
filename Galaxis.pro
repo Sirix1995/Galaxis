@@ -25,6 +25,7 @@ SOURCES += \
     gridobject.cpp \
         main.cpp \
         qmlapp.cpp \
+    tools/galaxisToolBox.cpp \
         viewpage/viewpage.cpp \
 	tools/crashReportTool.cpp \
         tools/appinfo.cpp \
@@ -35,6 +36,7 @@ HEADERS += \
     galaxisgrid.h \
     gridobject.h \
         qmlapp.h \
+    tools/galaxisToolBox.h \
         viewpage/viewpage.h \
         tools/debug_Info.h	\
         tools/appinfo.h \

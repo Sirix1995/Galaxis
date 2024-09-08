@@ -6,6 +6,7 @@
 #include "qmlapp.h"
 
 #include "viewpage/viewpage.h"
+#include "galaxisgrid.h"
 
 QmlApp::QmlApp(QWindow *parent)
     : QQuickView(parent)
@@ -13,6 +14,10 @@ QmlApp::QmlApp(QWindow *parent)
     setResizeMode(QQuickView::SizeRootObjectToView);
     m_page = new ViewPage(this, "qrc:/qml/main.qml", "uiLink");
     m_page->enableUiLink();
+
+    GalaxisGrid::registerQml();
+    GalaxisGrid::instance()->setRandomShips();
+
     viewChanger(m_page);
     show();
 }
