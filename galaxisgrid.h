@@ -11,7 +11,8 @@
 #define GRID_HEIGHT 7
 #define SHIP_NUMBER 4
 
-#define TEST_TIMER true
+#define TEST_TIMER false
+#define VERBOSE true
 
 class GalaxisGrid : public QObject
 {
@@ -24,7 +25,12 @@ public:
 
 public slots:
     Q_INVOKABLE void setRandomShips();
-    Q_INVOKABLE void beaconCall(int x, int y);
+    Q_INVOKABLE int beaconCall(int x, int y);
+
+    Q_INVOKABLE int getGridWidth();
+    Q_INVOKABLE int getGridHeight();
+
+    Q_INVOKABLE bool isShip(int x, int y);
 
 signals:
     void callResult_shipsDetected(int x, int y, int numberOfDetections);
@@ -35,7 +41,7 @@ private slots:
 
 private:
     explicit GalaxisGrid(QObject *parent = nullptr);
-    static GalaxisGrid *m_pThis;
+    static GalaxisGrid *m_pThis; 
 
     QList<QList<GridObject *>> grid;
 

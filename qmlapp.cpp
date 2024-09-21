@@ -18,6 +18,9 @@ QmlApp::QmlApp(QWindow *parent)
     GalaxisGrid::registerQml();
     GalaxisGrid::instance()->setRandomShips();
 
+    setWidth(1024);
+    setHeight(768);
+
     viewChanger(m_page);
     show();
 }

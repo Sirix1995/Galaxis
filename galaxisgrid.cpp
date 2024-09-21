@@ -58,33 +58,35 @@ void GalaxisGrid::setRandomShips()
 {
     QDBG_GREEN() << "Placing " << SHIP_NUMBER << " ships." << DBG_CLR_RESET;
 
-    for(int i = 0; i < SHIP_NUMBER; i++) {
+    int counter = 0;
+
+    while(counter < SHIP_NUMBER) {
         int x = QRandomGenerator::global()->bounded(GRID_WIDTH - 1);
         int y = QRandomGenerator::global()->bounded(GRID_HEIGHT - 1);
 
-        if(grid[x][y])
+        if(grid[x][y] && !isShip(x, y)) {
             grid[x][y]->setType(GridObject::GRIDOBJECT_SHIP);
-        else
-            QDBG_RED() << "ERROR ! Null grid object at " << x << " - " << y << "." << DBG_CLR_RESET;
+            counter++;
+        }
 
-        QDBG_GREEN() << "Ship " << i << " placed at " << x << " - " << y << "." << DBG_CLR_RESET;
+        QDBG_GREEN() << "Ship " << counter << " placed at " << x << " - " << y << "." << DBG_CLR_RESET;
     }
 }
 
-void GalaxisGrid::beaconCall(int x, int y)
+int GalaxisGrid::beaconCall(int x, int y)
 {
     QDBG_YELLOW() << "Radar call at " << x << " - " << y << " !" << DBG_CLR_RESET;
 
     GridObject* currentGridObject = grid[x][y];
     if(!currentGridObject) {
         QDBG_RED() << "ERROR ! Null grid object at " << x << " - " << y << "." << DBG_CLR_RESET;
-        return;
+        return -1;
     }
 
     if(currentGridObject->type() == GridObject::GRIDOBJECT_SHIP) {
         QDBG_GREEN() << "Ship found at " << x << " - " << y << " !" << DBG_CLR_RESET;
         emit callResult_shipFound(x, y);
-        return;
+        return 5;
     }
 
     currentGridObject->setBeaconCounter(0);
@@ -93,13 +95,13 @@ void GalaxisGrid::beaconCall(int x, int y)
     int radarY = y;
     bool shipFound = false;
 
-    //Under
+    //left
     while(radarX > 0 && !shipFound) {
         GridObject* scannedObject = grid[radarX][radarY];
 
         if(!scannedObject) {
             QDBG_RED() << "ERROR ! Null grid object at " << radarX << " - " << radarY << "." << DBG_CLR_RESET;
-            return;
+            return -1;
         }
 
         if(scannedObject->type() == GridObject::GRIDOBJECT_SHIP) {
@@ -110,16 +112,20 @@ void GalaxisGrid::beaconCall(int x, int y)
         radarX--;
     }
 
+#if VERBOSE
+    qDebug() << "After left : " << shipCount;
+#endif
+
     radarX = x;
     shipFound = false;
 
-    //Above
+    //Right
     while(radarX < GRID_WIDTH && !shipFound) {
         GridObject* scannedObject = grid[radarX][radarY];
 
         if(!scannedObject) {
             QDBG_RED() << "ERROR ! Null grid object at " << radarX << " - " << radarY << "." << DBG_CLR_RESET;
-            return;
+            return -1;
         }
 
         if(scannedObject->type() == GridObject::GRIDOBJECT_SHIP) {
@@ -130,16 +136,20 @@ void GalaxisGrid::beaconCall(int x, int y)
         radarX++;
     }
 
+#if VERBOSE
+    qDebug() << "After right : " << shipCount;
+#endif
+
     radarX = x;
     shipFound = false;
 
-    //Left
+    //Under
     while(radarY > 0 && !shipFound) {
         GridObject* scannedObject = grid[radarX][radarY];
 
         if(!scannedObject) {
             QDBG_RED() << "ERROR ! Null grid object at " << radarX << " - " << radarY << "." << DBG_CLR_RESET;
-            return;
+            return -1;
         }
 
         if(scannedObject->type() == GridObject::GRIDOBJECT_SHIP) {
@@ -150,16 +160,20 @@ void GalaxisGrid::beaconCall(int x, int y)
         radarY--;
     }
 
+#if VERBOSE
+    qDebug() << "After under : " << shipCount;
+#endif
+
     radarY = y;
     shipFound = false;
 
-    //Right
+    //Above
     while(radarY < GRID_HEIGHT && !shipFound) {
         GridObject* scannedObject = grid[radarX][radarY];
 
         if(!scannedObject) {
             QDBG_RED() << "ERROR ! Null grid object at " << radarX << " - " << radarY << "." << DBG_CLR_RESET;
-            return;
+            return -1;
         }
 
         if(scannedObject->type() == GridObject::GRIDOBJECT_SHIP) {
@@ -170,6 +184,10 @@ void GalaxisGrid::beaconCall(int x, int y)
         radarY++;
     }
 
+#if VERBOSE
+    qDebug() << "After above : " << shipCount;
+#endif
+
     radarY = y;
     shipFound = false;
 
@@ -179,7 +197,7 @@ void GalaxisGrid::beaconCall(int x, int y)
 
         if(!scannedObject) {
             QDBG_RED() << "ERROR ! Null grid object at " << radarX << " - " << radarY << "." << DBG_CLR_RESET;
-            return;
+            return -1;
         }
 
         if(scannedObject->type() == GridObject::GRIDOBJECT_SHIP) {
@@ -190,6 +208,10 @@ void GalaxisGrid::beaconCall(int x, int y)
         radarX--;
         radarY--;
     }
+
+#if VERBOSE
+    qDebug() << "After left above : " << shipCount;
+#endif
 
     radarX = x;
     radarY = y;
@@ -201,7 +223,7 @@ void GalaxisGrid::beaconCall(int x, int y)
 
         if(!scannedObject) {
             QDBG_RED() << "ERROR ! Null grid object at " << radarX << " - " << radarY << "." << DBG_CLR_RESET;
-            return;
+            return -1;
         }
 
         if(scannedObject->type() == GridObject::GRIDOBJECT_SHIP) {
@@ -213,6 +235,10 @@ void GalaxisGrid::beaconCall(int x, int y)
         radarY--;
     }
 
+#if VERBOSE
+    qDebug() << "After right above : " << shipCount;
+#endif
+
     radarX = x;
     radarY = y;
     shipFound = false;
@@ -223,7 +249,7 @@ void GalaxisGrid::beaconCall(int x, int y)
 
         if(!scannedObject) {
             QDBG_RED() << "ERROR ! Null grid object at " << radarX << " - " << radarY << "." << DBG_CLR_RESET;
-            return;
+            return -1;
         }
 
         if(scannedObject->type() == GridObject::GRIDOBJECT_SHIP) {
@@ -235,6 +261,10 @@ void GalaxisGrid::beaconCall(int x, int y)
         radarY++;
     }
 
+#if VERBOSE
+    qDebug() << "After left under : " << shipCount;
+#endif
+
     radarX = x;
     radarY = y;
     shipFound = false;
@@ -245,7 +275,7 @@ void GalaxisGrid::beaconCall(int x, int y)
 
         if(!scannedObject) {
             QDBG_RED() << "ERROR ! Null grid object at " << radarX << " - " << radarY << "." << DBG_CLR_RESET;
-            return;
+            return -1;
         }
 
         if(scannedObject->type() == GridObject::GRIDOBJECT_SHIP) {
@@ -257,9 +287,30 @@ void GalaxisGrid::beaconCall(int x, int y)
         radarY++;
     }
 
+#if VERBOSE
+    qDebug() << "After right under : " << shipCount;
+#endif
+
     QDBG_YELLOW() << "Call result : " << shipCount << " ships detected.";
     currentGridObject->setBeaconCounter(shipCount);
     emit callResult_shipsDetected(x, y, shipCount);
+    return shipCount;
+}
+
+int GalaxisGrid::getGridWidth()
+{
+    return GRID_WIDTH;
+}
+
+int GalaxisGrid::getGridHeight()
+{
+    return GRID_HEIGHT;
+}
+
+bool GalaxisGrid::isShip(int x, int y)
+{
+    //qDebug() << x << " - " << y;
+    return (grid[x][y]->type() == GridObject::GRIDOBJECT_SHIP);
 }
 
 void GalaxisGrid::randomCall()

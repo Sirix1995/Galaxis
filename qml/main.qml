@@ -2,38 +2,20 @@ import QtQuick 2.0
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.11
 import "./style/"
+import "items"
 
 AppRectangle {
+    id: root
 
-    property int nbClick: 0
-    property bool themeDark: true
-    onThemeDarkChanged: {
-        AppStyle.darkEnable = themeDark
-    }
+    width: 1024
+    height: 468
 
-    ColumnLayout {
-        id: column
+    GameGrid {
         anchors.fill: parent
-
-        AppLabel {
-            id: label
-            text: qsTr("===  " + nbClick + "  ===")
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-        }
-
-        AppButton {
-            id: button
-            text: qsTr("Button")
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            onClicked: {
-                nbClick++
-                themeDark = !themeDark
-                uiLink.stringDBG("nb click :" + nbClick)
-            }
-        }
-
+        anchors.topMargin: 20
+        anchors.leftMargin: 20
+        anchors.rightMargin: 20
+        anchors.bottomMargin: 20
     }
 }
 

@@ -25,5 +25,7 @@
         <file>qml/style/qmldir</file>
         <file>qml/textTools.js</file>
         <file>qml/main.qml</file>
+        <file>qml/items/GameGrid.qml</file>
+        <file>qml/items/TestGridObject.qml</file>
     </qresource>
 </RCC>
