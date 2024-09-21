@@ -96,7 +96,7 @@ int GalaxisGrid::beaconCall(int x, int y)
     bool shipFound = false;
 
     //left
-    while(radarX > 0 && !shipFound) {
+    while(radarX >= 0 && !shipFound) {
         GridObject* scannedObject = grid[radarX][radarY];
 
         if(!scannedObject) {
@@ -144,7 +144,7 @@ int GalaxisGrid::beaconCall(int x, int y)
     shipFound = false;
 
     //Under
-    while(radarY > 0 && !shipFound) {
+    while(radarY >= 0 && !shipFound) {
         GridObject* scannedObject = grid[radarX][radarY];
 
         if(!scannedObject) {
@@ -192,7 +192,7 @@ int GalaxisGrid::beaconCall(int x, int y)
     shipFound = false;
 
     //Diago left above
-    while(radarX > 0 && radarY > 0 && !shipFound) {
+    while(radarX >= 0 && radarY >= 0 && !shipFound) {
         GridObject* scannedObject = grid[radarX][radarY];
 
         if(!scannedObject) {
@@ -218,7 +218,7 @@ int GalaxisGrid::beaconCall(int x, int y)
     shipFound = false;
 
     //Diago right above
-    while(radarX < GRID_WIDTH && radarY > 0 && !shipFound) {
+    while(radarX < GRID_WIDTH && radarY >= 0 && !shipFound) {
         GridObject* scannedObject = grid[radarX][radarY];
 
         if(!scannedObject) {
@@ -244,7 +244,7 @@ int GalaxisGrid::beaconCall(int x, int y)
     shipFound = false;
 
     //Diago left under
-    while(radarX > 0 && radarY < GRID_HEIGHT && !shipFound) {
+    while(radarX >= 0 && radarY < GRID_HEIGHT && !shipFound) {
         GridObject* scannedObject = grid[radarX][radarY];
 
         if(!scannedObject) {

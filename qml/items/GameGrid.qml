@@ -11,7 +11,7 @@ Grid {
     columns: GalaxisGrid.getGridWidth()
 
     rowSpacing: (height - (50 * rows)) / (rows)
-    columnSpacing: (width - (50 - columns)) /(columns + 1)
+    columnSpacing: (width - (50 - columns)) /(columns + 6)
 
     flow: Grid.TopToBottom
 
