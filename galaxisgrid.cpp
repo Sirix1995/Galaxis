@@ -65,6 +65,7 @@ void GalaxisGrid::gameStart()
     }
 
     setRandomShips();
+    discoveredShips = 0;
 }
 
 void GalaxisGrid::setRandomShips()
