@@ -26,12 +26,12 @@ void GridObject::setBeaconCounter(int newBeaconCounter)
     m_beaconCounter = newBeaconCounter;
 }
 
-bool GridObject::getShipDiscovered() const
+bool GridObject::getDiscovered() const
 {
-    return shipDiscovered;
+    return discovered;
 }
 
-void GridObject::setShipDiscovered(bool newShipDiscovered)
+void GridObject::setDiscovered(bool newDiscovered)
 {
-    shipDiscovered = newShipDiscovered;
+    discovered = newDiscovered;
 }

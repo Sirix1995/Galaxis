@@ -13,6 +13,10 @@ Rectangle {
 
     property color baseColor: "skyblue"
     property color nothingColor: "grey"
+    property color radarColor: "khaki"
+    property color shipColor: "salmon"
+
+    property bool discovered: false
 
     signal objectClicked()
 

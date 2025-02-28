@@ -35,7 +35,7 @@ Grid {
 
         model: root.rows * root.columns
 
-        TestGridObject {
+        GridObject {
             id: delegate
 
             Layout.alignment: Layout.Center
@@ -43,9 +43,9 @@ Grid {
             onObjectClicked: {
                 beaconNumber = GalaxisGrid.beaconCall(gridX, gridY)
                 if(GalaxisGrid.isShip(gridX, gridY))
-                    color = "salmon"
+                    color = shipColor
                 else
-                    color = "khaki"
+                    color = radarColor
             }
 
             Label {

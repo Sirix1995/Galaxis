@@ -12,7 +12,7 @@
 #define SHIP_NUMBER 4
 
 #define TEST_TIMER false
-#define VERBOSE true
+#define VERBOSE false
 
 class GalaxisGrid : public QObject
 {
@@ -35,6 +35,7 @@ public slots:
 signals:
     void callResult_shipsDetected(int x, int y, int numberOfDetections);
     void callResult_shipFound(int x, int y);
+    void victory();
 
 private slots:
     void randomCall();
@@ -46,6 +47,7 @@ private:
     QList<QList<GridObject *>> grid;
 
     QTimer* testTimer = nullptr;
+    int discoveredShips = 0;
 };
 
 #endif // Erreur dans «  Cpp.classToHeaderGuard(value('Class'), Util.suffix(value('HdrFileName'))) » : TypeError: Property 'classToHeaderGuard' of object CppEditor::Internal::CppToolsJsExtension(0x1fd3dc543b0) is not a function

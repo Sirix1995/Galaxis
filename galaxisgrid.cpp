@@ -83,10 +83,22 @@ int GalaxisGrid::beaconCall(int x, int y)
         return -1;
     }
 
+    if(currentGridObject->getDiscovered()) {
+        QDBG_YELLOW() << "Already discovered !" << DBG_CLR_RESET;
+        return currentGridObject->beaconCounter();
+    }
+
     if(currentGridObject->type() == GridObject::GRIDOBJECT_SHIP) {
         QDBG_GREEN() << "Ship found at " << x << " - " << y << " !" << DBG_CLR_RESET;
         emit callResult_shipFound(x, y);
+        discoveredShips++;
+        if(discoveredShips == SHIP_NUMBER) {
+            QDBG_GREEN() << "All ship found ! Victory !" << DBG_CLR_RESET;
+            emit victory();
+        }
         return 5;
+    } else if(currentGridObject->type() == GridObject::GRIDOBJECT_VOID) {
+        currentGridObject->setType(GridObject::GRIDOBJECT_BEACON);
     }
 
     currentGridObject->setBeaconCounter(0);
@@ -293,6 +305,7 @@ int GalaxisGrid::beaconCall(int x, int y)
 
     QDBG_YELLOW() << "Call result : " << shipCount << " ships detected.";
     currentGridObject->setBeaconCounter(shipCount);
+    currentGridObject->setDiscovered(true);
     emit callResult_shipsDetected(x, y, shipCount);
     return shipCount;
 }

@@ -23,13 +23,13 @@ class GridObject : public QObject
         int beaconCounter() const;
         void setBeaconCounter(int newBeaconCounter);
 
-        bool getShipDiscovered() const;
-        void setShipDiscovered(bool newShipDiscovered);
+        bool getDiscovered() const;
+        void setDiscovered(bool newShipDiscovered);
 
     private:
         gridObjectType_e m_type = GRIDOBJECT_VOID;
         int m_beaconCounter = 0;
-        bool shipDiscovered = false;
+        bool discovered = false;
 
     signals:
 };
