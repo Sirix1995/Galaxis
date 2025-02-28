@@ -16,7 +16,7 @@ QmlApp::QmlApp(QWindow *parent)
     m_page->enableUiLink();
 
     GalaxisGrid::registerQml();
-    GalaxisGrid::instance()->setRandomShips();
+    GalaxisGrid::instance()->gameStart();
 
     setWidth(1024);
     setHeight(768);

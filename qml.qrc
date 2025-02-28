@@ -29,5 +29,6 @@
         <file>qml/items/GridObject.qml</file>
         <file>qml/items/StarrySky/StarrySky.qml</file>
         <file>qml/items/StarrySky/Star.qml</file>
+        <file>qml/items/BaseUIItems/GalaxisButton.qml</file>
     </qresource>
 </RCC>

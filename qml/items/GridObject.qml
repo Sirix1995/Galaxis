@@ -4,10 +4,17 @@ import QtQuick.Controls
 Rectangle {
     id: root
 
+    enum GridObjectState {
+        NOT_DISCOVERED,
+        SHIP_DISCOVERED,
+        RADAR_DISCOVERED,
+        GREYED_OUT
+    }
+
     property int gridX: 0
     property int gridY: 0
 
-    property int beaconNumber: 6
+    property int beaconNumber: 6 //Not discovered value
 
     color: baseColor
 
@@ -15,6 +22,25 @@ Rectangle {
     property color nothingColor: "grey"
     property color radarColor: "khaki"
     property color shipColor: "salmon"
+
+    property int actualState: GridObject.NOT_DISCOVERED
+
+    onActualStateChanged: {
+        switch(actualState) {
+            case GridObject.GREYED_OUT:
+                color = nothingColor
+                break
+            case GridObject.RADAR_DISCOVERED:
+                color = radarColor
+                break
+            case GridObject.SHIP_DISCOVERED:
+                color = shipColor
+                break
+            case GridObject.NOT_DISCOVERED:
+            default:
+                color = baseColor
+        }
+    }
 
     property bool discovered: false
 
@@ -56,13 +82,10 @@ Rectangle {
         anchors.fill: parent
 
         onClicked: {
-            var set = false
-            if(root.color == baseColor) {
-                root.color = nothingColor
-                set = true
-            }
-            if(root.color == nothingColor && !set)
-                root.color = baseColor
+            if(root.actualState == GridObject.NOT_DISCOVERED)
+                root.actualState = GridObject.GREYED_OUT
+            else if(root.actualState == GridObject.GREYED_OUT)
+                root.actualState = GridObject.NOT_DISCOVERED
         }
     }
 }

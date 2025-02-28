@@ -54,6 +54,19 @@ QObject *GalaxisGrid::qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine)
     return GalaxisGrid::instance();
 }
 
+void GalaxisGrid::gameStart()
+{
+    QDBG_BLUE() << "NEW GAME STARTING !" << DBG_CLR_RESET;
+    for(int i = 0; i < GRID_WIDTH; i++) {
+        for(int j = 0; j < GRID_HEIGHT; j++) {
+            grid[i][j]->setType(GridObject::GRIDOBJECT_VOID);
+            grid[i][j]->setDiscovered(false);
+        }
+    }
+
+    setRandomShips();
+}
+
 void GalaxisGrid::setRandomShips()
 {
     QDBG_GREEN() << "Placing " << SHIP_NUMBER << " ships." << DBG_CLR_RESET;

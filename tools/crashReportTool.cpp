@@ -1,4 +1,4 @@
-#include "crashreporttool.h"
+#include "crashReportTool.h"
 #include <QMutex>
 #include <QtCore>
 #include <stdio.h>

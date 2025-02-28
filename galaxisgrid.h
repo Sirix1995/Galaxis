@@ -24,6 +24,7 @@ public:
     static QObject *qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine);
 
 public slots:
+    Q_INVOKABLE void gameStart();
     Q_INVOKABLE void setRandomShips();
     Q_INVOKABLE int beaconCall(int x, int y);
 

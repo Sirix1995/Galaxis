@@ -17,12 +17,24 @@ Grid {
 
     Component.onCompleted: {
         var counter = 0
-        console.log("Columns : ", columns, " Rows : ", rows)
+
+        //console.log("Columns : ", columns, " Rows : ", rows)
         for(var i = 0; i < columns; i++) {
             for(var j = 0; j < rows; j++) {
-                console.log("Set x : ", i, " j : ", j)
+                //console.log("Set x : ", i, " j : ", j)
                 gridRepeater.itemAt(counter).gridX = i
                 gridRepeater.itemAt(counter).gridY = j
+                counter++
+            }
+        }
+    }
+
+    function init() {
+        var counter = 0
+        for(var i = 0; i < columns; i++) {
+            for(var j = 0; j < rows; j++) {
+                gridRepeater.itemAt(counter).actualState = GridObject.NOT_DISCOVERED
+                gridRepeater.itemAt(counter).beaconNumber = 6
                 counter++
             }
         }
@@ -43,9 +55,9 @@ Grid {
             onObjectClicked: {
                 beaconNumber = GalaxisGrid.beaconCall(gridX, gridY)
                 if(GalaxisGrid.isShip(gridX, gridY))
-                    color = shipColor
+                    actualState = GridObject.SHIP_DISCOVERED
                 else
-                    color = radarColor
+                    actualState = GridObject.RADAR_DISCOVERED
             }
 
             Label {
@@ -54,18 +66,6 @@ Grid {
                 anchors.top: parent.bottom
                 visible: false
                 text: parent.gridX + " - " + parent.gridY
-            }
-
-            Timer {
-                id: testTimer
-                interval: 1000
-                running: false
-                repeat: false
-                onTriggered: {
-                    if(GalaxisGrid.isShip(gridX, gridY)) {
-                        color = "salmon"
-                    }
-                }
             }
         }
     }
