@@ -27,6 +27,7 @@ Rectangle {
         verticalAlignment: Text.AlignVCenter
 
         font.pointSize: 24
+        color: "black"
 
         text: beaconNumber
 
