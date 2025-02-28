@@ -45,13 +45,14 @@ Grid {
                 if(GalaxisGrid.isShip(gridX, gridY))
                     color = "salmon"
                 else
-                    color = "lemonchiffon"
+                    color = "khaki"
             }
 
             Label {
                 id: testLabel
 
                 anchors.top: parent.bottom
+                visible: false
                 text: parent.gridX + " - " + parent.gridY
             }
 

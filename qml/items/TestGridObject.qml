@@ -12,7 +12,7 @@ Rectangle {
     color: baseColor
 
     property color baseColor: "skyblue"
-    property color nothingColor: "lightgrey"
+    property color nothingColor: "grey"
 
     signal objectClicked()
 

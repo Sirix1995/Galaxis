@@ -3,12 +3,20 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.11
 import "./style/"
 import "items"
+import "items/StarrySky"
 
 AppRectangle {
     id: root
 
     width: 1024
     height: 468
+
+    StarrySky {
+        id: background
+
+        anchors.fill: parent
+
+    }
 
     GameGrid {
         anchors.fill: parent
