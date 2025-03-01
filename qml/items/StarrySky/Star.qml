@@ -9,7 +9,7 @@ Shape {
 
     ShapePath {
         strokeWidth: 0
-        strokeColor: "red"
+        strokeColor: "transparent"
         fillGradient: RadialGradient {
             centerX: width / 2; centerY: height / 2
             centerRadius: width
