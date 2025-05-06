@@ -51,7 +51,7 @@ Shape {
 
     SequentialAnimation on opacity {
             loops: Animation.Infinite
-            NumberAnimation { to: 0.5; duration: glitterTime / 2 }
+            NumberAnimation { to: 0.2; duration: glitterTime / 2 }
             PauseAnimation { duration: glitterTime / 2 }
             NumberAnimation { to: 1.0; duration: glitterTime / 2 }
             PauseAnimation { duration: transparentTime }
