@@ -6,6 +6,13 @@ Shape {
 
     height: 5
     width: height
+    property int glitterTime: 500
+    property int transparentTime: 4500
+
+
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * max - 1) + 1;
+    }
 
     ShapePath {
         strokeWidth: 0
@@ -41,5 +48,13 @@ Shape {
                     direction: PathArc.Counterclockwise
                 }
     }
+
+    SequentialAnimation on opacity {
+            loops: Animation.Infinite
+            NumberAnimation { to: 0.5; duration: glitterTime / 2 }
+            PauseAnimation { duration: glitterTime / 2 }
+            NumberAnimation { to: 1.0; duration: glitterTime / 2 }
+            PauseAnimation { duration: transparentTime }
+        }
 
 }

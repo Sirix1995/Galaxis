@@ -23,6 +23,8 @@ Rectangle {
             height: getRandomInt(10)
             x: getRandomInt(root.width)
             y: getRandomInt(root.height)
+            glitterTime: 200 + getRandomInt(800)
+            transparentTime: 5000 + getRandomInt(1500)
         }
     }
 
