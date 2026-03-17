@@ -28,6 +28,9 @@ public slots:
 private slots:
     void viewChanger(ViewPage *page);
 
+    void loadMainMenu();
+    void loadGamePage();
+
 private:
     ViewPage *m_page = nullptr;
 };

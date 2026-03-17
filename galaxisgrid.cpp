@@ -66,6 +66,7 @@ void GalaxisGrid::gameStart()
 
     setRandomShips();
     discoveredShips = 0;
+    setScore(0);
 }
 
 void GalaxisGrid::setRandomShips()
@@ -110,7 +111,7 @@ int GalaxisGrid::beaconCall(int x, int y)
             QDBG_GREEN() << "All ship found ! Victory !" << DBG_CLR_RESET;
             emit victory();
         }
-        return 5;
+        return SHIP_BEACON_VALUE;
     } else if(currentGridObject->type() == GridObject::GRIDOBJECT_VOID) {
         currentGridObject->setType(GridObject::GRIDOBJECT_BEACON);
     }
@@ -321,6 +322,9 @@ int GalaxisGrid::beaconCall(int x, int y)
     currentGridObject->setBeaconCounter(shipCount);
     currentGridObject->setDiscovered(true);
     emit callResult_shipsDetected(x, y, shipCount);
+
+    setScore(m_score + 1);
+
     return shipCount;
 }
 
@@ -353,4 +357,17 @@ GalaxisGrid::~GalaxisGrid()
     for(int i = 0; i < grid.count(); i++)
         for(int j = 0; j < grid[i].count(); j++)
             delete grid[i][j];
+}
+
+int GalaxisGrid::score() const
+{
+    return m_score;
+}
+
+void GalaxisGrid::setScore(int newScore)
+{
+    if (m_score == newScore)
+        return;
+    m_score = newScore;
+    emit scoreChanged();
 }

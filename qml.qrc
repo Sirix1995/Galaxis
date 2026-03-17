@@ -24,11 +24,13 @@
         <file>qml/style/SBPicker.qml</file>
         <file>qml/style/qmldir</file>
         <file>qml/textTools.js</file>
-        <file>qml/main.qml</file>
+        <file>qml/GamePage.qml</file>
         <file>qml/items/GameGrid.qml</file>
         <file>qml/items/GridObject.qml</file>
         <file>qml/items/StarrySky/StarrySky.qml</file>
         <file>qml/items/StarrySky/Star.qml</file>
         <file>qml/items/BaseUIItems/GalaxisButton.qml</file>
+        <file>qml/MainMenuPage.qml</file>
+        <file>Images/ravensburger-1980 - -galaxis-electronic - -jeu-spatial-electronique-p-image-373396-grande.jpg - copie.png</file>
     </qresource>
 </RCC>
